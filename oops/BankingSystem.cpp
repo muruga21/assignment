@@ -34,6 +34,21 @@ class Account{
         cout << " > Your balance is " << Balance <<endl;
         return ;
     }
+
+    void deposit_SavingAcc(int amount){
+        Balance += amount;
+        cout<<"ammount deposited successfully..!"<<endl;
+    }
+
+    void deposit_CreditAccount(int amount){
+        if(Bill <= amount){
+            cout<<"Invalid amound"<<endl;
+            return;
+        }
+        Bill -= amount;
+        cout<<"ammount deposited successfully..!"<<endl;
+    }
+
 };
 
 class Bank {
@@ -82,7 +97,12 @@ class Application : public Bank{
             cin >> selected_option;
             if(selected_option == 0) break;
             else if(selected_option == 1) (acc_type == "credit") ? acc->getBill() : acc->getBalance();
-            else if(selected_option == 2) ;
+            else if(selected_option == 2){
+                int amount;
+                cout <<" > Enter the amount need to deposited.."<<endl;
+                cin>>amount;
+                (acc_type == "credit") ? acc->deposit_CreditAccount(amount) : acc->deposit_SavingAcc(amount);
+            }
             else if(selected_option == 3) ;
             else cout << " > Invalid Option.. !" << endl ;
         }
